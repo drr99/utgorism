@@ -239,7 +239,7 @@ section {
   border-radius: 18px;
   overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   color: #777;
   height: 100%;
@@ -248,7 +248,7 @@ section {
 .image-card img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
   object-position: center top;
 }
@@ -1251,6 +1251,20 @@ section {
     gap: 14px;
     padding: 14px 24px;
     flex-wrap: wrap;
+    transition:
+      transform 0.35s ease,
+      background 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .site-header.is-menu-open {
+    border-bottom: 1px solid rgba(247, 201, 72, 0.38);
+    background:
+      linear-gradient(180deg, rgba(18, 18, 18, 0.96), rgba(5, 5, 5, 0.9)),
+      radial-gradient(circle at top left, rgba(247, 201, 72, 0.16), transparent 42%);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.42);
+    backdrop-filter: blur(12px);
   }
 
   .header-logo img {
@@ -1260,6 +1274,8 @@ section {
   .menu-toggle {
     display: block;
     margin-left: auto;
+    background: rgba(5, 5, 5, 0.58);
+    box-shadow: inset 0 0 0 1px rgba(247, 201, 72, 0.16);
   }
 
   .site-nav {
@@ -1267,18 +1283,28 @@ section {
     flex: 0 0 100%;
     flex-direction: column;
     align-items: stretch;
-    gap: 4px;
-    padding: 10px 0 0;
+    gap: 6px;
+    padding: 14px 0 6px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
   }
 
   .site-nav a {
-    padding: 12px 0;
-    font-size: 13px;
-    text-align: right;
+    padding: 13px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background:
+      linear-gradient(90deg, rgba(247, 201, 72, 0.12), transparent 34%),
+      rgba(255, 255, 255, 0.045);
+    color: #f2f2f2;
+    font-size: 14px;
+    text-align: left;
+    box-shadow: inset 3px 0 0 rgba(247, 201, 72, 0.58);
   }
 
   .site-nav a:hover {
-    background: transparent;
+    background:
+      linear-gradient(90deg, rgba(247, 201, 72, 0.22), transparent 46%),
+      rgba(255, 255, 255, 0.07);
     color: #f7c948;
   }
 
@@ -1287,6 +1313,10 @@ section {
   }
 
   .image-card {
+    height: auto;
+  }
+
+  .image-card img {
     height: auto;
   }
 

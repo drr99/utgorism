@@ -3,20 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+
+      if (window.location.hash) {
+        history.replaceState(
+          null,
+          "",
+          window.location.pathname + window.location.search,
+        );
+      }
+    </script>
     <meta property="og:title" content="웃고리즘 채널소개서" />
     <meta property="og:description" content="웃고리즘 채널소개서" />
     <meta
       property="og:image"
-      content="https://drr99.github.io/img/slate_.png"
+      content="https://drr99.github.io/img/slate_.png?v=20260518"
     />
     <meta
       property="og:image:secure_url"
-      content="https://drr99.github.io/img/slate_.png"
+      content="https://drr99.github.io/img/slate_.png?v=20260518"
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:image"
-      content="https://drr99.github.io/img/slate_.png"
+      content="https://drr99.github.io/img/slate_.png?v=20260518"
     />
     <title>웃고리즘 채널소개서</title>
     <link rel="icon" type="image/png" href="img/Favicon.png" />
@@ -709,23 +722,6 @@
     </section>
 
     <script>
-      if ("scrollRestoration" in history) {
-        history.scrollRestoration = "manual";
-      }
-
-      window.addEventListener("pageshow", () => {
-        if (window.matchMedia("(max-width: 900px)").matches) {
-          history.replaceState(
-            null,
-            "",
-            window.location.pathname + window.location.search,
-          );
-          window.scrollTo(0, 0);
-        } else if (!window.location.hash) {
-          window.scrollTo(0, 0);
-        }
-      });
-
       const fades = document.querySelectorAll(".fade");
 
       const observer = new IntersectionObserver(
@@ -775,7 +771,19 @@
       });
 
       siteNav.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
+        link.addEventListener("click", (event) => {
+          const target = document.querySelector(link.getAttribute("href"));
+
+          if (target) {
+            event.preventDefault();
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+            history.replaceState(
+              null,
+              "",
+              window.location.pathname + window.location.search,
+            );
+          }
+
           header.classList.remove("is-menu-open");
           menuToggle.setAttribute("aria-expanded", "false");
           menuToggle.setAttribute("aria-label", "메뉴 열기");
