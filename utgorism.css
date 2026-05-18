@@ -984,6 +984,7 @@ section {
 .muketch-impact span {
   display: block;
   color: #ddd;
+  word-break: keep-all;
 }
 
 .roadmap {
@@ -1190,13 +1191,11 @@ section {
 
 .fade {
   opacity: 0;
-  transform: translateY(40px);
-  transition: 1s;
+  transition: opacity 0.8s ease;
 }
 
 .fade.on {
   opacity: 1;
-  transform: translateY(0);
 }
 
 @media (max-width: 1200px) {
@@ -1373,6 +1372,7 @@ section {
   .target-points,
   .chart-legend {
     font-size: 18px;
+    word-break: keep-all;
   }
 
   .age-chart h4 {
