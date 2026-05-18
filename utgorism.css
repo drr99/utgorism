@@ -393,15 +393,11 @@ section {
 
 .target-step {
   opacity: 0;
-  transform: translateY(28px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
+  transition: opacity 0.7s ease;
 }
 
 #target.on .target-step {
   opacity: 1;
-  transform: translateY(0);
 }
 
 #target.on .target-step:nth-child(2) {
@@ -927,6 +923,7 @@ section {
   font-size: 18px;
   text-align: left;
   margin-top: 4px;
+  word-break: break-all;
 }
 
 .muketch-impact {
@@ -1033,7 +1030,7 @@ section {
 
 .schedule-main strong {
   color: #fff;
-  font-size: clamp(16px, 2.1vw, 34px);
+  font-size: clamp(19px, 2.1vw, 34px);
   line-height: 1.25;
   white-space: nowrap;
 }
@@ -1098,6 +1095,7 @@ section {
 .contact-lead {
   margin-top: 10px;
   font-size: 22px;
+  word-break: keep-all;
 }
 .contact-info p {
   margin: 22px 0;
@@ -1123,7 +1121,9 @@ section {
 .contact-copy {
   min-width: 0;
 }
-
+.contact-copy b {
+  margin-right: 5px;
+}
 .contact-character {
   display: block;
   width: 100%;
@@ -1385,7 +1385,7 @@ section {
   }
 
   .age-row span {
-    font-size: clamp(13px, 4vw, 16px);
+    font-size: clamp(13px, 4vw, 18px);
   }
 
   .age-row div {
@@ -1478,5 +1478,8 @@ section {
   .profile-video {
     flex-basis: 100%;
     max-width: none;
+  }
+  .contact-info p {
+    font-size: 20px;
   }
 }
