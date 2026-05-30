@@ -682,35 +682,82 @@
     </section>
 
     <section class="contact fade" id="contact">
-      <div>
-        <h2>CONTACT</h2>
-        <p
-          class="contact-lead"
-          aria-label="웃고리즘과 함께할 광고주님을 기다립니다."
-        >
-          <span>웃고리즘과 함께할 광고주님을 기다립니다.</span>
-        </p>
-      </div>
-
-      <div class="contact-info">
-        <div class="contact-copy">
-          <p><b>담당자</b> Lena Park</p>
-          <p><b>연락처</b> 010-9399-9220</p>
-          <p><b>이메일</b> cdcd2006@naver.com</p>
-          <a
-            href="mailto:cdcd2006@naver.com?subject=%EC%9B%83%EA%B3%A0%EB%A6%AC%EC%A6%98%20%ED%98%91%EC%97%85%20%EB%AC%B8%EC%9D%98"
-            class="btn"
+      <div class="contact-inner">
+        <div class="contact-intro">
+          <h2>CONTACT</h2>
+          <p
+            class="contact-lead"
+            aria-label="웃고리즘과 함께할 광고주님을 기다립니다."
           >
-            협업 문의하기
-          </a>
+            <span>웃고리즘과 함께할</span>
+            <strong><mark>광고주님</mark>을 기다립니다.</strong>
+          </p>
         </div>
-        <img
-          src="img/logo_mini.png"
-          alt="웃고리즘 캐릭터"
-          class="contact-character"
-        />
+
+        <ol class="contact-steps">
+          <li>
+            <span class="contact-number">01</span>
+            <b>상품 및 단가</b>
+            <p>
+              광고 상품 및 단가표는 브랜드의 활용 범위, 콘텐츠 형태, 집행 일정에
+              따라 별도 안내드리고 있습니다.
+            </p>
+          </li>
+          <li>
+            <span class="contact-number">02</span>
+            <b>빠른 안내를 위해</b>
+            <p>
+              협업 문의 시 브랜드명, 제품/서비스, 희망 업로드 시기, 활용 범위를
+              함께 전달주시면 더 빠르게 안내드릴 수 있습니다.
+            </p>
+          </li>
+          <li>
+            <span class="contact-number">03</span>
+            <b>문의하기</b>
+            <p>
+              지금 바로 편하게 연락주세요. <br />
+              함께 성장할 수 있는 기회를 기다리고 있습니다.
+            </p>
+            <div class="contact-copy">
+              <p><b>담당자</b> Lena Park</p>
+              <p><b>연락처</b> 010-9399-9220</p>
+              <p><b>이메일</b> cdcd2006@naver.com</p>
+              <a
+                href="mailto:cdcd2006@naver.com?subject=%EC%9B%83%EA%B3%A0%EB%A6%AC%EC%A6%98%20%ED%98%91%EC%97%85%20%EB%AC%B8%EC%9D%98"
+                class="btn"
+                id="contactMailButton"
+              >
+                협업 문의하기
+              </a>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
+
+    <div class="mail-fallback" id="mailFallback" aria-hidden="true">
+      <div class="mail-fallback-panel" role="dialog" aria-modal="true" aria-labelledby="mailFallbackTitle">
+        <button
+          class="mail-fallback-close"
+          type="button"
+          aria-label="메일 안내 닫기"
+        ></button>
+        <strong id="mailFallbackTitle">메일 앱이 열리지 않았나요?</strong>
+        <p>
+          사용 환경에 따라 메일 앱이 자동으로 열리지 않을 수 있습니다.
+          <br />
+          아래 이메일로 직접 협업 문의를 보내주세요.
+        </p>
+        <button
+          class="mail-fallback-address"
+          type="button"
+          data-copy-email="cdcd2006@naver.com"
+        >
+          cdcd2006@naver.com
+        </button>
+        <span class="mail-fallback-copy" aria-live="polite"></span>
+      </div>
+    </div>
 
     <script>
       const fades = document.querySelectorAll(".fade");
@@ -888,6 +935,55 @@
 
         moveShortsSlider(false);
         startShortsSlider();
+      }
+
+      const contactMailButton = document.querySelector("#contactMailButton");
+      const mailFallback = document.querySelector("#mailFallback");
+
+      if (contactMailButton && mailFallback) {
+        const closeMailFallback = () => {
+          mailFallback.classList.remove("is-open");
+          mailFallback.setAttribute("aria-hidden", "true");
+        };
+
+        contactMailButton.addEventListener("click", () => {
+          window.setTimeout(() => {
+            mailFallback.classList.add("is-open");
+            mailFallback.setAttribute("aria-hidden", "false");
+          }, 450);
+        });
+
+        mailFallback
+          .querySelector(".mail-fallback-close")
+          .addEventListener("click", closeMailFallback);
+
+        mailFallback
+          .querySelector(".mail-fallback-address")
+          .addEventListener("click", async (event) => {
+            const email = event.currentTarget.dataset.copyEmail;
+            const copyMessage = mailFallback.querySelector(
+              ".mail-fallback-copy",
+            );
+
+            try {
+              await navigator.clipboard.writeText(email);
+              copyMessage.textContent = "이메일 주소가 복사되었습니다.";
+            } catch {
+              copyMessage.textContent = "복사되지 않으면 이메일 주소를 직접 선택해주세요.";
+            }
+          });
+
+        mailFallback.addEventListener("click", (event) => {
+          if (event.target === mailFallback) {
+            closeMailFallback();
+          }
+        });
+
+        window.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            closeMailFallback();
+          }
+        });
       }
     </script>
   </body>
